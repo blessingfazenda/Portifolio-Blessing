@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blessing Fazenda | Engenheiro Informático</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Arial, sans-serif;scroll-behavior:smooth;}
+body{background:#000;color:#fff;}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 10%;position:fixed;width:100%;background:#000;z-index:1000;border-bottom:1px solid rgba(0,255,136,0.2);}
+header h1{color:#00ff88;font-size:24px;}
+nav a{margin-left:20px;color:#fff;text-decoration:none;transition:0.3s;font-size:16px;}
+nav a:hover{color:#00ff88;}
+section{padding:100px 10%;}
+
+.hero{display:flex;align-items:center;justify-content:space-between;min-height:100vh;animation:fadeIn 1s ease-in;gap:50px;}
+.hero-text h2{font-size:45px;}
+.hero-text span{color:#00ff88;}
+.hero-text h3{font-size:22px;margin-top:10px;}
+.hero-text p{margin:20px 0;color:#aaa;max-width:500px;}
+
+.social a{color:#fff;font-size:24px;margin-right:15px;transition:0.3s;display:inline-block;}
+.social a:hover{color:#00ff88;transform:translateY(-3px);}
+
+.buttons a{padding:12px 25px;margin-right:10px;border-radius:25px;text-decoration:none;display:inline-block;transition:0.3s;}
+.buttons a:first-child{background:#00ff88;color:#000;font-weight:bold;}
+.buttons a:last-child{border:1px solid #00ff88;color:#00ff88;}
+.buttons a:hover{transform:scale(1.05);box-shadow:0 0 15px #00ff88;}
+
+.hero-img{width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,#00ff88,#001a0f);display:flex;align-items:center;justify-content:center;box-shadow:0 0 50px #00ff88;animation:float 3s ease-in-out infinite;}
+.hero-img img{width:90%;border-radius:50%;object-fit:cover;height:90%;}
+
+h2.section-title{color:#00ff88;margin-bottom:20px;font-size:30px;border-left:4px solid #00ff88;padding-left:15px;}
+
+.services,.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;}
+.card{background:#111;padding:25px;border-radius:15px;transition:0.3s;border:1px solid #222;overflow:hidden;}
+.card:hover{transform:translateY(-10px);border:1px solid #00ff88;box-shadow:0 0 20px rgba(0,255,136,0.2);}
+.card img{width:100%;border-radius:10px;margin-bottom:15px;height:180px;object-fit:cover;}
+.card h3{color:#00ff88;margin-bottom:10px;}
+.card p{color:#aaa;line-height:1.5;}
+.card a{display:inline-block;margin-top:15px;color:#00ff88;text-decoration:none;font-weight:bold;}
+.card a:hover{text-decoration:underline;}
+
+.contact-info p{margin:10px 0;color:#aaa;font-size:16px;}
+.contact-info a{color:#00ff88;text-decoration:none;}
+.contact-info a:hover{text-decoration:underline;}
+footer{text-align:center;padding:30px;background:#111;color:#aaa;font-size:14px;}
+
+/* Botão WhatsApp */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:#fff;
+padding:15px;
+border-radius:50%;
+font-size:24px;
+box-shadow:0 0 20px rgba(37,211,102,0.5);
+text-decoration:none;
+transition:0.3s;
+z-index:1000;
+}
+.whatsapp:hover{transform:scale(1.1);background:#128C7E;}
+
+/* Toggle Button de Idioma */
+.lang-toggle {
+    position: fixed;
+    top: 85px;
+    right: 20px;
+    z-index: 1000;
+    background: #111;
+    padding: 5px 10px;
+    border-radius: 40px;
+    border: 1px solid #00ff88;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lang-toggle:hover {
+    box-shadow: 0 0 10px #00ff88;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 55px;
+    height: 26px;
+    background: #333;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.toggle-slider {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: #00ff88;
+    border-radius: 50%;
+    top: 2px;
+    left: 3px;
+    transition: 0.3s;
+    box-shadow: 0 0 5px #00ff88;
+}
+
+.lang-toggle.active .toggle-slider {
+    left: 30px;
+}
+
+.lang-text {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.lang-text.pt {
+    color: #00ff88;
+}
+
+.lang-text.en {
+    color: #aaa;
+}
+
+.lang-toggle.active .lang-text.pt {
+    color: #aaa;
+}
+
+.lang-toggle.active .lang-text.en {
+    color: #00ff88;
+}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}}
+
+@media(max-width:768px){
+header{flex-direction:column;gap:15px;padding:15px 5%;}
+nav a{margin:0 10px;font-size:14px;}
+.hero{flex-direction:column;text-align:center;padding-top:150px;}
+.hero-text p{margin:20px auto;}
+.hero-img{width:250px;height:250px;margin-top:20px;}
+section{padding:80px 5%;}
+h2.section-title{font-size:26px;}
+.card{padding:20px;}
+.lang-toggle{top: 75px; right: 10px; padding: 4px 8px;}
+.toggle-switch{width: 48px; height: 24px;}
+.toggle-slider{width: 20px; height: 20px;}
+.lang-toggle.active .toggle-slider{left: 26px;}
+}
+
+@media(max-width:480px){
+.hero-text h2{font-size:32px;}
+.hero-text h3{font-size:18px;}
+.buttons a{padding:10px 18px;font-size:14px;}
+.social a{font-size:20px;margin-right:10px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Toggle Button de Tradução -->
+<div class="lang-toggle" id="langToggle">
+    <span class="lang-text pt">🇵🇹 PT</span>
+    <div class="toggle-switch">
+        <div class="toggle-slider"></div>
+    </div>
+    <span class="lang-text en">🇬🇧 EN</span>
+</div>
+
+<header>
+<h1>Blessing Fazenda</h1>
+<nav>
+<a href="#home">Home</a>
+<a href="#about">Sobre</a>
+<a href="#services">Serviços</a>
+<a href="#projects">Projectos</a>
+<a href="#skills">Habilidades</a>
+<a href="#contact">Contacto</a>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<div class="hero-text">
+<h2>Olá, eu sou <span>Blessing Fazenda</span></h2>
+<h3>Engenheiro Informático & <span>Desenvolvedor Web</span></h3>
+<p>Crio soluções digitais modernas, sistemas inteligentes e websites profissionais que ajudam empresas a crescer.</p>
+
+<div class="social">
+<a href="https://github.com/blessingfazenda" target="_blank"><i class="fab fa-github"></i></a>
+<a href="https://linkedin.com/in/blessingfazenda" target="_blank"><i class="fab fa-linkedin"></i></a>
+<a href="https://wa.me/258846674727" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<a href="https://twitter.com/blessingfazenda" target="_blank"><i class="fab fa-twitter"></i></a>
+<a href="https://instagram.com/fazendajunior" target="_blank"><i class="fab fa-instagram"></i></a>
+</div>
+
+<div class="buttons">
+<a href="mailto:blessingalbertofazenda@gmail.com?subject=Pedido de Serviço&body=Olá Blessing, vi o seu portfólio e gostaria de falar sobre um projeto."><i class="fas fa-envelope"></i> Enviar Email</a>
+<a href="#contact" class="contact"><i class="fas fa-phone-alt"></i> Contacto</a>
+</div>
+</div>
+
+<div class="hero-img">
+<img src="imagens/perfil.jpg" alt="Blessing Fazenda - Perfil">
+</div>
+</section>
+
+<section id="about">
+<h2 class="section-title">Sobre Mim</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; justify-content: space-between;">
+    <div style="flex: 1;">
+        <p style="line-height: 1.6; color: #ddd;">Sou Engenheiro Informático, com experiência no desenvolvimento de soluções full stack, utilizando linguagens como Java, Python e JavaScript, e frameworks como React, Node.js e Spring Boot. Tenho conhecimentos em bases de dados relacionais (PostgreSQL, MySQL) e não relacionais (MongoDB), versionamento com Git, e boas práticas como REST APIs, testes unitários e metodologias ágeis (Scrum/Kanban).</p>
+        <p style="line-height: 1.6; color: #ddd; margin-top: 15px;">Gosto de entender o problema antes de escrever uma única linha de código, e procuro sempre equilibrar a solução tecnicamente correta com a simplicidade. Sou curioso por natureza — estou sempre a explorar novas ferramentas, tecnologias e formas de otimizar processos.</p>
+        <p style="line-height: 1.6; color: #ddd; margin-top: 15px;">Fora do mundo da programação, sou fã de xadrez, café forte e jogos de estratégia. Acredito que a lógica, a criatividade e a disciplina que aplico no tabuleiro e nos jogos também me tornam um melhor engenheiro no dia a dia.</p>
+    </div>
+</div>
+</section>
+
+<section id="services">
+<h2 class="section-title">Serviços</h2>
+<div class="services">
+<div class="card"><h3><i class="fas fa-laptop" style="margin-right:10px;"></i> Reparação de Computadores</h3><p>Diagnóstico e reparação de desktops e laptops. Substituição de componentes, limpeza interna, reinstalação de sistemas, remoção de vírus e recuperação de dados.</p></div>
+<div class="card"><h3><i class="fas fa-network-wired" style="margin-right:10px;"></i> Redes e Infraestrutura</h3><p>Configuração de routers, switches, access points Wi-Fi e cablagem estruturada. Criação de redes locais (LAN), controlo de largura de banda e VPN.</p></div>
+<div class="card"><h3><i class="fas fa-video" style="margin-right:10px;"></i> Sistemas CCTV</h3><p>Projeto e instalação de câmaras de vigilância (IP ou analógicas HD). Configuração de gravadores, visão noturna, deteção de movimento e acesso remoto.</p></div>
+<div class="card"><h3><i class="fas fa-shield-alt" style="margin-right:10px;"></i> Cibersegurança</h3><p>Proteção de sistemas, redes e dados. Testes de penetração, firewalls, controlo de acessos, encriptação, backups e auditorias de segurança.</p></div>
+<div class="card"><h3><i class="fas fa-code" style="margin-right:10px;"></i> Desenvolvimento Web</h3><p>Criação de websites modernos, responsivos e otimizados para SEO. Landing pages, lojas online e sistemas personalizados.</p></div>
+<div class="card"><h3><i class="fas fa-database" style="margin-right:10px;"></i> Banco de Dados</h3><p>Modelagem, otimização e gestão de bases de dados relacionais e não relacionais. Consultas, índices e backups.</p></div>
+</div>
+</section>
+
+<section id="projects">
+<h2 class="section-title">Projectos</h2>
+<div class="projects">
+<div class="card">
+<img src="imagens/hotel.webp" alt="Sistema de Gestão de Hotel Fazenda">
+<h3>🏨 Sistema Hotel Fazenda</h3>
+<p>Plataforma completa que integra gestão hoteleira com atividades rurais. Reservas, passeios a cavalo, trilhas, controlo de estoque da horta, animais, queijaria e dashboard com indicadores.</p>
+<a href="#">Ver Projeto →</a>
+</div>
+<div class="card">
+<img src="imagens/empresa.jpg" alt="Website Empresarial Rural">
+<h3>🌿 Website TechRural</h3>
+<p>"Empoderar negócios rurais com tecnologia acessível, simples e poderosa, para que possam crescer sem perder a sua essência."</p>
+<a href="#">Ver Projeto →</a>
+</div>
+</div>
+</section>
+
+<section id="skills">
+<h2 class="section-title">Habilidades</h2> 
+<div class="services"> 
+<div class="card"><i class="fab fa-html5" style="font-size:40px;color:#00ff88;"></i><h3>HTML5</h3><p>Estruturação semântica e moderna de websites.</p></div> 
+<div class="card"><i class="fab fa-css3-alt" style="font-size:40px;color:#00ff88;"></i><h3>CSS3</h3><p>Design responsivo, animações e layouts profissionais.</p></div> 
+<div class="card"><i class="fab fa-js" style="font-size:40px;color:#00ff88;"></i><h3>JavaScript</h3><p>Interatividade e desenvolvimento frontend dinâmico.</p></div> 
+<div class="card"><i class="fab fa-php" style="font-size:40px;color:#00ff88;"></i><h3>PHP</h3><p>Backend, formulários e lógica do servidor.</p></div> 
+<div class="card"><i class="fas fa-database" style="font-size:40px;color:#00ff88;"></i><h3>MySQL</h3><p>Gestão e modelagem de bases de dados.</p></div> 
+<div class="card"><i class="fab fa-java" style="font-size:40px;color:#00ff88;"></i><h3>Java</h3><p>Desenvolvimento de sistemas robustos e escaláveis.</p></div> 
+<div class="card"><i class="fab fa-python" style="font-size:40px;color:#00ff88;"></i><h3>Python</h3><p>Automação, análise de dados e scripts.</p></div> 
+<div class="card"><i class="fab fa-react" style="font-size:40px;color:#00ff88;"></i><h3>React</h3><p>Desenvolvimento de interfaces modernas e componentizadas.</p></div> 
+</div> 
+</section>
+
+<section id="contact"> 
+<h2 class="section-title">Contacto</h2> 
+<div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between;">
+    <div style="flex: 1;">
+        <div class="contact-info"> 
+            <p><i class="fas fa-envelope" style="color:#00ff88; margin-right:10px;"></i> <a href="mailto:blessingalbertofazenda@gmail.com">blessingalbertofazenda@gmail.com</a></p> 
+            <p><i class="fab fa-whatsapp" style="color:#25D366; margin-right:10px;"></i> <a href="https://wa.me/258846674727">+258 84 667 4727</a></p> 
+            <p><i class="fas fa-map-marker-alt" style="color:#00ff88; margin-right:10px;"></i> Tete, Moçambique</p> 
+        </div> 
+    </div>
+    
+    <div style="flex: 1;"> 
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3845.5!2d33.5!3d-16.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18ed5b9b1b3b3b3b%3A0x0!2zMTbCsDA2JzAwLjAiUyAzM8KwMzAnMDAuMCJF!5e0!3m2!1spt!2smz!4v1" width="100%" height="250" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy"></iframe> 
+    </div>
+</div> 
+</section>
+
+<footer>
+<p>© 2026 Blessing Fazenda - Engenheiro Informático | <i class="fas fa-heart" style="color:#00ff88;"></i> Soluções digitais para o seu negócio</p>
+</footer>
+
+<a href="https://wa.me/258846674727" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<!-- SCRIPT DE TRADUÇÃO COMPLETO -->
+<script>
+// ========================================
+// SISTEMA DE TRADUÇÃO - 100% COMPLETO
+// ========================================
+
+// Conteúdo traduzido - TODOS OS ELEMENTOS DO SITE
+const traducoes = {
+    pt: {
+        // Menu
+        titulo: "Blessing Fazenda",
+        menu: ["Home", "Sobre", "Serviços", "Projetos", "Skills", "Contacto"],
+        
+        // Hero
+        saudacao: "Olá, eu sou",
+        nome: "Blessing Fazenda",
+        profissao: "Engenheiro Informático & Desenvolvedor Web",
+        descricao: "Crio soluções digitais modernas, sistemas inteligentes e websites profissionais que ajudam empresas a crescer.",
+        
+        // Botões
+        btn_email: "Enviar Email",
+        btn_contacto: "Contacto",
+        
+        // Sobre Mim
+        sobre_titulo: "Sobre Mim",
+        sobre_texto1: "Sou Engenheiro Informático, com experiência no desenvolvimento de soluções full stack, utilizando linguagens como Java, Python e JavaScript, e frameworks como React, Node.js e Spring Boot. Tenho conhecimentos em bases de dados relacionais (PostgreSQL, MySQL) e não relacionais (MongoDB), versionamento com Git, e boas práticas como REST APIs, testes unitários e metodologias ágeis (Scrum/Kanban).",
+        sobre_texto2: "Gosto de entender o problema antes de escrever uma única linha de código, e procuro sempre equilibrar a solução tecnicamente correta com a simplicidade. Sou curioso por natureza — estou sempre a explorar novas ferramentas, tecnologias e formas de otimizar processos.",
+        sobre_texto3: "Fora do mundo da programação, sou fã de xadrez, café forte e jogos de estratégia. Acredito que a lógica, a criatividade e a disciplina que aplico no tabuleiro e nos jogos também me tornam um melhor engenheiro no dia a dia.",
+        
+        // Serviços - Títulos e Descrições
+        servicos_titulo: "Serviços",
+        servicos: [
+            { titulo: "💻 Reparação de Computadores", descricao: "Diagnóstico e reparação de desktops e laptops. Substituição de componentes, limpeza interna, reinstalação de sistemas, remoção de vírus e recuperação de dados." },
+            { titulo: "🌐 Redes e Infraestrutura", descricao: "Configuração de routers, switches, access points Wi-Fi e cablagem estruturada. Criação de redes locais (LAN), controlo de largura de banda e VPN." },
+            { titulo: "📹 Sistemas CCTV", descricao: "Projeto e instalação de câmaras de vigilância (IP ou analógicas HD). Configuração de gravadores, visão noturna, deteção de movimento e acesso remoto." },
+            { titulo: "🔒 Cibersegurança", descricao: "Proteção de sistemas, redes e dados. Testes de penetração, firewalls, controlo de acessos, encriptação, backups e auditorias de segurança." },
+            { titulo: "💻 Desenvolvimento Web", descricao: "Criação de websites modernos, responsivos e otimizados para SEO. Landing pages, lojas online e sistemas personalizados." },
+            { titulo: "🗄️ Banco de Dados", descricao: "Modelagem, otimização e gestão de bases de dados relacionais e não relacionais. Consultas, índices e backups." }
+        ],
+        
+        // Projetos
+        projetos_titulo: "Projetos",
+        projetos: [
+            { titulo: "🏨 Sistema Hotel Fazenda", descricao: "Plataforma completa que integra gestão hoteleira com atividades rurais. Reservas, passeios a cavalo, trilhas, controlo de estoque da horta, animais, queijaria e dashboard com indicadores.", link: "Ver Projeto →" },
+            { titulo: "🌿 Website TechRural", descricao: "Empoderar negócios rurais com tecnologia acessível, simples e poderosa, para que possam crescer sem perder a sua essência.", link: "Ver Projeto →" }
+        ],
+        
+        // Skills
+        skills_titulo: "Skills",
+        skills: [
+            { nome: "HTML5", descricao: "Estruturação semântica e moderna de websites." },
+            { nome: "CSS3", descricao: "Design responsivo, animações e layouts profissionais." },
+            { nome: "JavaScript", descricao: "Interatividade e desenvolvimento frontend dinâmico." },
+            { nome: "PHP", descricao: "Backend, formulários e lógica do servidor." },
+            { nome: "MySQL", descricao: "Gestão e modelagem de bases de dados." },
+            { nome: "Java", descricao: "Desenvolvimento de sistemas robustos e escaláveis." },
+            { nome: "Python", descricao: "Automação, análise de dados e scripts." },
+            { nome: "React", descricao: "Desenvolvimento de interfaces modernas e componentizadas." }
+        ],
+        
+        // Contacto e Footer
+        contact_titulo: "Contacto",
+        footer: "© 2026 Blessing Fazenda - Engenheiro Informático | ❤️ Soluções digitais para o seu negócio"
+    },
+    
+    en: {
+        // Menu
+        titulo: "Blessing Fazenda",
+        menu: ["Home", "About", "Services", "Projects", "Skills", "Contact"],
+        
+        // Hero
+        saudacao: "Hello, I'm",
+        nome: "Blessing Fazenda",
+        profissao: "Computer Engineer & Web Developer",
+        descricao: "I create modern digital solutions, intelligent systems and professional websites that help businesses grow.",
+        
+        // Buttons
+        btn_email: "Send Email",
+        btn_contacto: "Contact",
+        
+        // About Me
+        sobre_titulo: "About Me",
+        sobre_texto1: "I am a Computer Engineer, experienced in developing full stack solutions using languages like Java, Python and JavaScript, and frameworks like React, Node.js and Spring Boot. I have knowledge of relational databases (PostgreSQL, MySQL) and non-relational databases (MongoDB), version control with Git, and best practices like REST APIs, unit testing and agile methodologies (Scrum/Kanban).",
+        sobre_texto2: "I like to understand the problem before writing a single line of code, and I always try to balance the technically correct solution with simplicity. I am naturally curious — always exploring new tools, technologies and ways to optimize processes.",
+        sobre_texto3: "Outside the programming world, I'm a fan of chess, strong coffee and strategy games. I believe that the logic, creativity and discipline I apply on the board and in games also make me a better engineer in my daily life.",
+        
+        // Services
+        servicos_titulo: "Services",
+        servicos: [
+            { titulo: "💻 Computer Repair", descricao: "Diagnosis and repair of desktops and laptops. Component replacement, internal cleaning, OS reinstallation, virus removal and data recovery." },
+            { titulo: "🌐 Networks & Infrastructure", descricao: "Configuration of routers, switches, Wi-Fi access points and structured cabling. LAN creation, bandwidth control and VPN setup." },
+            { titulo: "📹 CCTV Systems", descricao: "Design and installation of surveillance cameras (IP or analog HD). Recorder configuration, night vision, motion detection and remote access." },
+            { titulo: "🔒 Cybersecurity", descricao: "System, network and data protection. Penetration testing, firewalls, access control, encryption, secure backups and security audits." },
+            { titulo: "💻 Web Development", descricao: "Creation of modern, responsive and SEO-optimized websites. Landing pages, e-commerce and custom systems." },
+            { titulo: "🗄️ Databases", descricao: "Modeling, optimization and management of relational and non-relational databases. Queries, indexes and backups." }
+        ],
+        
+        // Projects
+        projetos_titulo: "Projects",
+        projetos: [
+            { titulo: "🏨 Farm Hotel System", descricao: "Complete platform that integrates hotel management with rural activities. Reservations, horse rides, trails, garden inventory control, animals, cheese production and dashboard with indicators.", link: "View Project →" },
+            { titulo: "🌿 TechRural Website", descricao: "Empower rural businesses with accessible, simple and powerful technology, so they can grow without losing their essence.", link: "View Project →" }
+        ],
+        
+        // Skills
+        skills_titulo: "Skills",
+        skills: [
+            { nome: "HTML5", descricao: "Semantic and modern website structuring." },
+            { nome: "CSS3", descricao: "Responsive design, animations and professional layouts." },
+            { nome: "JavaScript", descricao: "Interactivity and dynamic frontend development." },
+            { nome: "PHP", descricao: "Backend, forms and server logic." },
+            { nome: "MySQL", descricao: "Database management and modeling." },
+            { nome: "Java", descricao: "Robust and scalable system development." },
+            { nome: "Python", descricao: "Automation, data analysis and scripts." },
+            { nome: "React", descricao: "Modern and component-based interface development." }
+        ],
+        
+        // Contact and Footer
+        contact_titulo: "Contact",
+        footer: "© 2026 Blessing Fazenda - Computer Engineer | ❤️ Digital solutions for your business"
+    }
+};
+
+let idiomaAtual = 'pt';
+
+function traduzirSite(idioma) {
+    idiomaAtual = idioma;
+    const t = traducoes[idioma];
+    
+    // 1. Título da página
+    document.title = t.titulo;
+    
+    // 2. Logo
+    document.querySelector('header h1').textContent = t.titulo;
+    
+    // 3. Menu
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach((link, index) => {
+        if (t.menu[index]) link.textContent = t.menu[index];
+    });
+    
+    // 4. Hero Section
+    document.querySelector('.hero-text h2').innerHTML = `${t.saudacao} <span>${t.nome}</span>`;
+    document.querySelector('.hero-text h3').innerHTML = t.profissao;
+    document.querySelector('.hero-text p').textContent = t.descricao;
+    
+    // 5. Botões
+    const buttons = document.querySelectorAll('.buttons a');
+    if (buttons[0]) buttons[0].innerHTML = `<i class="fas fa-envelope"></i> ${t.btn_email}`;
+    if (buttons[1]) buttons[1].innerHTML = `<i class="fas fa-phone-alt"></i> ${t.btn_contacto}`;
+    
+    // 6. Sobre Mim
+    document.querySelector('#about .section-title').textContent = t.sobre_titulo;
+    const aboutPs = document.querySelectorAll('#about > div > div p');
+    if (aboutPs[0]) aboutPs[0].textContent = t.sobre_texto1;
+    if (aboutPs[1]) aboutPs[1].textContent = t.sobre_texto2;
+    if (aboutPs[2]) aboutPs[2].textContent = t.sobre_texto3;
+    
+    // 7. Serviços (Título + Cards)
+    document.querySelector('#services .section-title').textContent = t.servicos_titulo;
+    const servicosCards = document.querySelectorAll('#services .services .card');
+    servicosCards.forEach((card, index) => {
+        if (t.servicos[index]) {
+            const h3 = card.querySelector('h3');
+            const p = card.querySelector('p');
+            if (h3) h3.innerHTML = t.servicos[index].titulo;
+            if (p) p.textContent = t.servicos[index].descricao;
+        }
+    });
+    
+    // 8. Projetos (Título + Cards)
+    document.querySelector('#projects .section-title').textContent = t.projetos_titulo;
+    const projetosCards = document.querySelectorAll('#projects .projects .card');
+    projetosCards.forEach((card, index) => {
+        if (t.projetos[index]) {
+            const h3 = card.querySelector('h3');
+            const p = card.querySelector('p');
+            const a = card.querySelector('a');
+            if (h3) h3.textContent = t.projetos[index].titulo;
+            if (p) p.textContent = t.projetos[index].descricao;
+            if (a) a.textContent = t.projetos[index].link;
+        }
+    });
+    
+    // 9. Skills (Título + Cards)
+    document.querySelector('#skills .section-title').textContent = t.skills_titulo;
+    const skillsCards = document.querySelectorAll('#skills .services .card');
+    skillsCards.forEach((card, index) => {
+        if (t.skills[index]) {
+            const h3 = card.querySelector('h3');
+            const p = card.querySelector('p');
+            if (h3) h3.textContent = t.skills[index].nome;
+            if (p) p.textContent = t.skills[index].descricao;
+        }
+    });
+    
+    // 10. Contacto
+    document.querySelector('#contact .section-title').textContent = t.contact_titulo;
+    
+    // 11. Footer
+    document.querySelector('footer p').innerHTML = t.footer;
+    
+    // 12. Salvar preferência do utilizador
+    localStorage.setItem('idioma', idioma);
+}
+
+// Toggle button
+const toggleBtn = document.getElementById('langToggle');
+
+function alternarIdioma() {
+    if (idiomaAtual === 'pt') {
+        traduzirSite('en');
+        toggleBtn.classList.add('active');
+    } else {
+        traduzirSite('pt');
+        toggleBtn.classList.remove('active');
+    }
+}
+
+toggleBtn.addEventListener('click', alternarIdioma);
+
+// Carregar idioma salvo no localStorage
+const idiomaSalvo = localStorage.getItem('idioma');
+if (idiomaSalvo === 'en') {
+    traduzirSite('en');
+    toggleBtn.classList.add('active');
+} else {
+    traduzirSite('pt');
+}
+</script>
+
+</body>
+</html>
